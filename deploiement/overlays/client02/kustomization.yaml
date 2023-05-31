@@ -1,0 +1,11 @@
+bases:
+- ../../base
+
+namespace: client02
+
+patches:
+- replicas.yaml
+
+configMapGenerator:
+- name: config-map
+  env: config.properties

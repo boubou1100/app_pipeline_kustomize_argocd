@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  #  labels:
+  #  app: monnginx
+  name: monnginx
+spec:
+  replicas: 1
+  #selector:
+  #  matchLabels:
+  #    app: monnginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      #    labels:
+      #  app: monnginx
+    spec:
+      containers:
+      - envFrom:
+        - configMapRef:
+            name: config-map
+        image: default
+        name: default
+        resources: {}
+status: {}

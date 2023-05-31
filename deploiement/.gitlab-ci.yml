@@ -1,0 +1,27 @@
+stages:
+  - detect
+  - deploy
+
+detect-overlays:
+  stage: detect
+  script:
+    - echo "Detecting new overlays..."
+    - changed_overlays=$(git diff --name-only HEAD^ HEAD | grep '^overlays/')
+    - |
+      for overlay in $changed_overlays; do
+        overlay_name=$(dirname $overlay)
+        echo "Triggering deployment job: $overlay_name"
+        kubectl kustomize $overlay_name
+        kubectl kustomize $overlay_name | kubectl apply -f -
+      done
+  only:
+    changes:
+      - '**/overlays/**/*'
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "OK"
+    - whoami
+
+

@@ -1,0 +1,17 @@
+resources:
+- deploy.yaml
+- service.yaml
+
+commonLabels:
+  app: web
+
+namePrefix:
+  fnumiot-
+
+#nameSuffix:
+#  -v1
+
+images:
+- name: default
+  newName: gitlab.example.com:5050/project01/integration
+  newTag: latest
